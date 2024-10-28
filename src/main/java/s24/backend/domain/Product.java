@@ -1,5 +1,5 @@
 package s24.backend.domain;
 
-public class Manufacturer {
+public class Product {
 
 }
