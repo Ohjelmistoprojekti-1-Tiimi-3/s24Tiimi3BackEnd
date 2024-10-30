@@ -1,6 +1,5 @@
 package s24.backend.web;
 
-<<<<<<< HEAD
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +9,6 @@ import s24.backend.domain.Product;
 import s24.backend.domain.ProductRepository;
 import org.springframework.web.bind.annotation.RequestParam;
 
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,15 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import s24.backend.domain.Product;
 import s24.backend.domain.ProductRepository;
->>>>>>> 389320cee8b9829e6b99230d7f7bfb8fee3ece09
 
 @Controller
 public class ProductController {
 
-<<<<<<< HEAD
-
-
-=======
     @Autowired
     private ProductRepository productrepo;
 
@@ -61,7 +54,12 @@ public class ProductController {
          return "redirect:productlist";
      }
      
+    //Muokataan tuotetta
+    @GetMapping("edit/{id}")
+	public String editProduct(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("editproduct", productrepo.findById(id));
+		return "editbook";
+	}
     
     
->>>>>>> 389320cee8b9829e6b99230d7f7bfb8fee3ece09
 }
