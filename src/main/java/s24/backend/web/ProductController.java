@@ -58,7 +58,7 @@ public class ProductController {
     @GetMapping("edit/{id}")
 	public String editProduct(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("editproduct", productrepo.findById(id));
-		return "editbook";
+		return "edit";
 	}
     
     
