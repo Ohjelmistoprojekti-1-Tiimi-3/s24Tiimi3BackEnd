@@ -1,5 +1,78 @@
 package s24.backend.domain;
 
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Manufacturer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+
+    private Long manufacturerid;
+    private String manufacturername;
+    private String manufacturerinfo;
+
+    @OneToMany(mappedBy = "manufacturer")
+
+    @JsonIgnoreProperties("manufacturer")
+
+    private Set<Product> products;
+
+    public Manufacturer(Long manufacturerid, String manufacturername, String manufacturerinfo) {
+        this.manufacturerid = manufacturerid;
+        this.manufacturername = manufacturername;
+        this.manufacturerinfo = manufacturerinfo;
+    }
+
+    public Manufacturer() {
+    }
+
+    public Long getManufacturerid() {
+        return manufacturerid;
+    }
+
+    public void setManufacturerid(Long manufacturerid) {
+        this.manufacturerid = manufacturerid;
+    }
+
+    public String getManufacturername() {
+        return manufacturername;
+    }
+
+    public void setManufacturername(String manufacturername) {
+        this.manufacturername = manufacturername;
+    }
+
+    public String getManufacturerinfo() {
+        return manufacturerinfo;
+    }
+
+    public void setManufacturerinfo(String manufacturerinfo) {
+        this.manufacturerinfo = manufacturerinfo;
+    }
+
+    public Set<Product> getProducts() {
+        return products;
+    }
+
+    public void setProducts(Set<Product> products) {
+        this.products = products;
+    }
+
+    @Override
+    public String toString() {
+        return "manufacturer id = " + manufacturerid + ", manufacturer name = " + manufacturername
+                + ", manufacturer info =" + manufacturerinfo;
+    }
+
+    
 
 }
