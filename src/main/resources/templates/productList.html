@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<h1>Products</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Color</th>
+            <th>Manufacturer</th>
+            <th>Info</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${products.productname}"></td>
+            <td th:text="${products.type}"></td>
+            <td th:text="${products.size}"></td>
+            <td th:text="${products.price}"></td>
+            <td th:text="${products.color}"></td>
+            <td th:text="${products.manufacturer}"></td>
+            <td th:text="${products.productinfo}"></td>
+        </tr>
+    </table>
+
+    <h1>Add a new Product</h1>
+    <div>
+        <form action="#" th:object="${product}" th:action="@{addProduct}"
+            method="post">
+                <div>
+                    <label>Name</label> <input type="text" th:field="*{productname}" />
+                </div>
+                <div>
+                    <select id="type" th:field="*{type}">
+                        <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.type}"></option>
+                    </select>
+                </div>
+                <div>
+                    <select id="size" th:field="*{size}">
+                        <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.size}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>Price</label> <input type="text" th:field="*{price}" />
+                </div>
+                <div>
+                    <label>Color</label> <input type="text" th:field="*{color}" />
+                </div>
+                <div>
+                    <select id="manufacturer" th:field="*{manufacturer}">
+                        <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.manufacturer}"></option>
+                    </select>
+                </div>
+                <div>
+                    <label>Info</label> <input type="text" th:field="*{productinfo}" />
+                </div>
+
+                <input type="submit" value="Add" />
+        </form>
+    </div>
+</body>
+</html>
