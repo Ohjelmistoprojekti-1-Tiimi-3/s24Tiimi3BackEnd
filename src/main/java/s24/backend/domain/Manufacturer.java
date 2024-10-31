@@ -14,20 +14,16 @@ import jakarta.persistence.OneToMany;
 public class Manufacturer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long manufacturerid;
     private String manufacturername;
     private String manufacturerinfo;
 
     @OneToMany(mappedBy = "manufacturer")
-
     @JsonIgnoreProperties("manufacturer")
-
     private Set<Product> products;
 
-    public Manufacturer(Long manufacturerid, String manufacturername, String manufacturerinfo) {
-        this.manufacturerid = manufacturerid;
+    public Manufacturer(String manufacturername, String manufacturerinfo) {
         this.manufacturername = manufacturername;
         this.manufacturerinfo = manufacturerinfo;
     }
@@ -72,7 +68,5 @@ public class Manufacturer {
         return "manufacturer id = " + manufacturerid + ", manufacturer name = " + manufacturername
                 + ", manufacturer info =" + manufacturerinfo;
     }
-
-    
 
 }

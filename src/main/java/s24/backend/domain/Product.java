@@ -17,8 +17,7 @@ import jakarta.persistence.ManyToOne;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productid;
     private String productname;
     private Float price;
@@ -38,12 +37,10 @@ public class Product {
     @ManyToMany
     @JoinTable(name = "product_size", joinColumns = @JoinColumn(name = "productid"), inverseJoinColumns = @JoinColumn(name = "sizeid"))
     @JsonIgnoreProperties("products")
-
     private Set<Size> size;
 
-    public Product(long productid, String productname, Float price, String color, String info,
+    public Product(String productname, Float price, String color, String info,
             Manufacturer manufacturer, Set<Type> type, Set<Size> size) {
-        this.productid = productid;
         this.productname = productname;
         this.price = price;
         this.color = color;

@@ -14,18 +14,15 @@ import jakarta.persistence.ManyToMany;
 public class Size {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long sizeid;
     private String size;
 
     @ManyToMany(mappedBy = "size")
     @JsonIgnoreProperties("size")
-
     private Set<Product> products;
 
-    public Size(Long sizeid, String size) {
-        this.sizeid = sizeid;
+    public Size(String size) {
         this.size = size;
     }
 
@@ -60,6 +57,5 @@ public class Size {
     public String toString() {
         return "size id = " + sizeid + ", size = " + size;
     }
-    
-    
+
 }

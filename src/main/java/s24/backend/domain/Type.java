@@ -14,18 +14,15 @@ import jakarta.persistence.ManyToMany;
 public class Type {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long typeid;
     private String typename;
 
     @ManyToMany(mappedBy = "type")
     @JsonIgnoreProperties("type")
-
     private Set<Product> products;
 
-    public Type(Long typeid, String typename) {
-        this.typeid = typeid;
+    public Type(String typename) {
         this.typename = typename;
     }
 
