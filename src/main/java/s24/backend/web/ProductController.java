@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import s24.backend.domain.Manufacturer;
 import s24.backend.domain.ManufacturerRepository;
+import s24.backend.domain.ManufacturerRepository;
 import s24.backend.domain.Product;
 import s24.backend.domain.ProductRepository;
 import s24.backend.domain.SizeRepository;
