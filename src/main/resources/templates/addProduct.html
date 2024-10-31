@@ -1,45 +1,48 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Add product</title>
 </head>
+
 <body>
     <h1>Add a new Product</h1>
-<div>
-    <form action="#" th:object="${product}" th:action="@{addProduct}" method="post">
-        <div>
-            <label for="productname">Name</label>
-            <input type="text" id="productname" th:field="*{productname}" />
-        </div>
-        <div>
-            <select id="type" th:field="*{type}">
-                <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.type}"></option>
-            </select>
-        </div>
-        <div>
-            <select id="size" th:field="*{size}">
-                <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.size}"></option>
-            </select>
-        </div>
-        <div>
-            <label>Price</label> <input type="text" th:field="*{price}" />
-        </div>
-        <div>
-            <label>Color</label> <input type="text" th:field="*{color}" />
-        </div>
-        <div>
-            <select id="manufacturer" th:field="*{manufacturer}">
-                <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.manufacturer}"></option>
-            </select>
-        </div>
-        <div>
-            <label>Info</label> <input type="text" th:field="*{info}" />
-        </div>
+    <div>
+        <form action="#" th:object="${product}" th:action="@{addProduct}" method="post">
+            <div>
+                <label for="productname">Name</label>
+                <input type="text" id="productname" th:field="*{productname}" />
+            </div>
+            <div>
+                <select id="type" th:field="*{type}">
+                    <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.type}"></option>
+                </select>
+            </div>
+            <div>
+                <select id="size" th:field="*{size}">
+                    <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.size}"></option>
+                </select>
+            </div>
+            <div>
+                <label>Price</label> <input type="text" th:field="*{price}" />
+            </div>
+            <div>
+                <label>Color</label> <input type="text" th:field="*{color}" />
+            </div>
+            <div>
+                <select id="manufacturer" th:field="*{manufacturer}">
+                    <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.manufacturer}"></option>
+                </select>
+            </div>
+            <div>
+                <label>Info</label> <input type="text" th:field="*{info}" />
+            </div>
 
-        <input type="submit" value="Add" />
-    </form>
-</div>
+            <input type="submit" value="Add" />
+        </form>
+    </div>
 </body>
+
 </html>

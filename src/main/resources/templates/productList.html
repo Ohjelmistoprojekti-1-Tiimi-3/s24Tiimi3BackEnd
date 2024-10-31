@@ -16,19 +16,18 @@
         <th>Info</th>
     </tr>
     <tr th:each="product : ${products}">
-        <td th:text="${products.productname}"></td>
-        <td th:text="${products.type}"></td>
-        <td th:text="${products.size}"></td>
-        <td th:text="${products.price}"></td>
-        <td th:text="${products.color}"></td>
-        <td th:text="${products.manufacturer}"></td>
-        <td th:text="${products.productinfo}"></td>
+        <td th:text="${product.productname}"></td>
+        <td th:text="${product.type}"></td>
+        <td th:text="${product.size}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.color}"></td>
+        <td th:text="${product.manufacturer}"></td>
+        <td th:text="${product.info}"></td>
     </tr>
 </table>
 
 <a href="/addProduct">Add product</a>
 
-</div>
 </body>
 
 </html>
