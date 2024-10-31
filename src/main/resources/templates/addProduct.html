@@ -37,6 +37,15 @@
         <div>
             <label>Info</label> <input type="text" th:field="*{info}" />
         </div>
+        <div>
+            <label for="manufacturer">Manufacturer</label>
+            <select id="manufacturer" name="manufacturerId">
+                <option th:each="manufacturer : ${manufacturers}" 
+                        th:value="${manufacturer.manufacturerid}" 
+                        th:text="${manufacturer.manufacturername}">
+                </option>
+            </select>
+        </div>
 
         <input type="submit" value="Add" />
     </form>
