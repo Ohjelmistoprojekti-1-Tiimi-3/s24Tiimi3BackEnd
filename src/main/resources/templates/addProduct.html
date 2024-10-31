@@ -10,34 +10,40 @@
 <body>
     <h1>Add a new Product</h1>
     <div>
-        <form action="#" th:object="${product}" th:action="@{addProduct}" method="post">
+        <form action="#" th:object="${product}" th:action="@{saveProduct}" method="post">
             <div>
                 <label for="productname">Name</label>
                 <input type="text" id="productname" th:field="*{productname}" />
             </div>
             <div>
+                <label for="type">Type</label>
                 <select id="type" th:field="*{type}">
-                    <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.type}"></option>
+                    <option th:each="type : ${types}" th:value="${type.typeid}" th:text="${type.typename}"></option>
                 </select>
             </div>
             <div>
+                <label for="size">Size</label>
                 <select id="size" th:field="*{size}">
-                    <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.size}"></option>
+                    <option th:each="size: ${sizes}" th:value="${size.sizeid}" th:text="${size.size}"></option>
                 </select>
             </div>
             <div>
-                <label>Price</label> <input type="text" th:field="*{price}" />
+                <label for="price">Price</label> 
+                <input type="text" id="price" th:field="*{price}" />
             </div>
             <div>
-                <label>Color</label> <input type="text" th:field="*{color}" />
+                <label for="color">Color</label>
+                <input type="text" id="color" th:field="*{color}" />
             </div>
             <div>
+                <label for="manufacturer">Manufacturer</label>
                 <select id="manufacturer" th:field="*{manufacturer}">
-                    <option th:each="p: ${product}" th:value="${p.productid}" th:text="${p.manufacturer}"></option>
+                    <option th:each="manufacturer: ${manufacturers}" th:value="${manufacturer.manufacturerid}" th:text="${manufacturer.manufacturername}"></option>
                 </select>
             </div>
             <div>
-                <label>Info</label> <input type="text" th:field="*{info}" />
+                <label for="info">Info</label>
+                <input type="text" id="info" th:field="*{info}" />
             </div>
 
             <input type="submit" value="Add" />
