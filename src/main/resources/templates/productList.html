@@ -17,11 +17,15 @@
     </tr>
     <tr th:each="product : ${products}">
         <td th:text="${product.productname}"></td>
-        <td th:text="${product.type}"></td>
-        <td th:text="${product.size}"></td>
+        <td>
+            <span th:each="type : ${product.type}" th:text="${type.typename} + ' '"></span>
+        </td>
+        <td>
+            <span th:each="size : ${product.size}" th:text="${size.size} + ' '"></span>
+        </td>
         <td th:text="${product.price}"></td>
         <td th:text="${product.color}"></td>
-        <td th:text="${product.manufacturer}"></td>
+        <td th:text="${product.manufacturer.manufacturername}"></td>
         <td th:text="${product.info}"></td>
     </tr>
 </table>

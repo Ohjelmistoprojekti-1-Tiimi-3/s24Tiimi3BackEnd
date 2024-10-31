@@ -17,13 +17,13 @@
             </div>
             <div>
                 <label for="type">Type</label>
-                <select id="type" th:field="*{type}">
+                <select id="type" th:field="*{type}" multiple>
                     <option th:each="type : ${types}" th:value="${type.typeid}" th:text="${type.typename}"></option>
                 </select>
             </div>
             <div>
                 <label for="size">Size</label>
-                <select id="size" th:field="*{size}">
+                <select id="size" th:field="*{size}" multiple>
                     <option th:each="size: ${sizes}" th:value="${size.sizeid}" th:text="${size.size}"></option>
                 </select>
             </div>
