@@ -1,6 +1,7 @@
 package s24.backend.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,15 +27,23 @@ public class ManufacturerController {
     }
 
     // Saving the information to a new manufacturer object
-    // Useless bindingresult as "Unique" does not translate to validation
-    // Added just for future reference and when we need to add a working method to DAO class to parse uniques
+    /* 
+     * Ugly catcher for unique manufacturer name
+     * because Thymeleaf does not handle validation from unique constraints without a separate method
+    */
+
     @RequestMapping(value = "/saveManufacturer", method = RequestMethod.POST)
     public String saveProduct(@ModelAttribute("manufacturer") Manufacturer manufacturer, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
 			return "addManufacturer";
 		}
-        manufacturerrepo.save(manufacturer);
+        try {
+            manufacturerrepo.save(manufacturer);
+        } catch (DataIntegrityViolationException e) {
+            bindingResult.rejectValue("manufacturername", "error.manufacturer", "Manufacturer name must be unique.");
+            return "addManufacturer";
+        }
         return "redirect:addManufacturer";
     }
 }
