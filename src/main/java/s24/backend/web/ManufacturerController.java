@@ -20,7 +20,7 @@ public class ManufacturerController {
 
     // Adding a new manufacturer
     @RequestMapping(value = "/addManufacturer", method = RequestMethod.GET)
-    public String addProduct(Model model) {
+    public String addManufacturer(Model model) {
         model.addAttribute("manufacturer", new Manufacturer());
         model.addAttribute("manufacturers", manufacturerrepo.findAll());
         return "addManufacturer";
@@ -33,7 +33,7 @@ public class ManufacturerController {
     */
 
     @RequestMapping(value = "/saveManufacturer", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("manufacturer") Manufacturer manufacturer, BindingResult bindingResult) {
+    public String saveManufacturer(@ModelAttribute("manufacturer") Manufacturer manufacturer, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
 			return "addManufacturer";
