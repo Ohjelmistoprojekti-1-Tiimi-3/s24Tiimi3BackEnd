@@ -52,14 +52,12 @@ public class ProductController {
         return "redirect:productList";
     }
 
-    // Poistetaan tuote
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id, Model model) {
         productrepo.deleteById(id);
         return "redirect:productlist";
     }
 
-    // Muokataan tuotetta
     @GetMapping("/edit/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editproduct", productrepo.findById(id));

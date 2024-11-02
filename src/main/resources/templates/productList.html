@@ -27,6 +27,10 @@
         <td th:text="${product.color}"></td>
         <td th:text="${product.manufacturer.manufacturername}"></td>
         <td th:text="${product.info}"></td>
+        <td>
+            <a th:href="@{/delete/{id}(id=${product.id})}">Delete</a>
+            <a th:href="@{/edit/{id}(id=${product.id})}">Edit</a>
+        </td>
     </tr>
 </table>
 
