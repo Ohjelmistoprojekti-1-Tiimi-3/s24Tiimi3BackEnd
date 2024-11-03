@@ -10,7 +10,8 @@
 <body>
     <h1>Edit product</h1>
     <div>
-        <form action="#" th:object="${editproduct}" th:action="@{saveProduct}" method="post">
+        <form action="#" th:object="${editproduct}" th:action="@{/saveProduct}" method="post">
+            <input type="hidden" th:field="*{productid}">
             <div>
                 <label for="productname">Name</label>
                 <input type="text" id="productname" th:field="*{productname}" />

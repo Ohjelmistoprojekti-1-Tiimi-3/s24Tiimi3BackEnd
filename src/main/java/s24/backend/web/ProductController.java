@@ -62,6 +62,7 @@ public class ProductController {
         model.addAttribute("editproduct", productrepo.findById(id));
         model.addAttribute("sizes", sizerepo.findAll());
         model.addAttribute("types", typerepo.findAll());
+        model.addAttribute("manufacturers", manufacturerrepo.findAll());
         return "editProduct";
     }
 
