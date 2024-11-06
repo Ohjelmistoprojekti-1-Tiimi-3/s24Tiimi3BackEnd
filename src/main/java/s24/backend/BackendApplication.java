@@ -46,9 +46,9 @@ public class BackendApplication {
 			srepo.save(s3);
 			srepo.save(s4);
 			srepo.save(s5);
-			Type t1 = new Type("Haalari");
-			Type t2 = new Type("Sadetakki");
-			Type t3 = new Type("Heijastava");
+			Type t1 = new Type("Takki");
+			Type t2 = new Type("Lelu");
+			Type t3 = new Type("Ruoka");
 			trepo.save(t1);
 			trepo.save(t2);
 			trepo.save(t3);
