@@ -2,6 +2,8 @@ package s24.backend.domain;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,6 +23,7 @@ public class Manufacturer {
     
     private String manufacturerinfo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "manufacturer")
     private Set<Product> products;
 

@@ -2,6 +2,7 @@ package s24.backend.domain;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -24,16 +25,19 @@ public class Product {
     private String color;
     private String info;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "manufacturerid")
     @JsonIgnoreProperties("products")
     private Manufacturer manufacturer;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "product_type", joinColumns = @JoinColumn(name = "productid"), inverseJoinColumns = @JoinColumn(name = "typeid"))
     @JsonIgnoreProperties("products")
     private Set<Type> type;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "product_size", joinColumns = @JoinColumn(name = "productid"), inverseJoinColumns = @JoinColumn(name = "sizeid"))
     @JsonIgnoreProperties("products")
