@@ -60,6 +60,6 @@ public class ManufacturerController {
             bindingResult.rejectValue("manufacturername", "error.manufacturer", "Manufacturer name must be unique.");
             return "addManufacturer";
         }
-        return "redirect:addManufacturer";
+        return "redirect:/manufacturerlist";
     }
 }
