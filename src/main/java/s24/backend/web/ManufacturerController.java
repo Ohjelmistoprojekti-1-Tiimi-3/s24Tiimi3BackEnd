@@ -5,7 +5,9 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -24,6 +26,20 @@ public class ManufacturerController {
         model.addAttribute("manufacturer", new Manufacturer());
         model.addAttribute("manufacturers", manufacturerrepo.findAll());
         return "addManufacturer";
+    }
+
+    //showing the manufacturers
+    @GetMapping("/manufacturerlist")
+    public String showManufacturers(Model model) {
+        model.addAttribute("manufacturers", manufacturerrepo.findAll());
+        return "manufacturerlist";
+    }
+
+    //delete manufacturer
+    @GetMapping("/manufacturer/delete/{id}")
+    public String deleteManufacturer(@PathVariable("id") Long id, Model model) {
+        manufacturerrepo.deleteById(id);
+        return "redirect:/manufacturerlist";
     }
 
     // Saving the information to a new manufacturer object
