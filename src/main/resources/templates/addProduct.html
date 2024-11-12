@@ -14,6 +14,7 @@
             <div>
                 <label for="productname">Name</label>
                 <input type="text" id="productname" th:field="*{productname}" />
+                <div th:if="${#fields.hasErrors('productname')}" th:each="err : ${#fields.errors('productname')}" th:text="${err}" style="color: red;"></div>
             </div>
             <div>
                 <label for="type">Type</label>
@@ -30,6 +31,7 @@
             <div>
                 <label for="price">Price</label> 
                 <input type="text" id="price" th:field="*{price}" />
+                <div th:if="${#fields.hasErrors('price')}" th:each="err : ${#fields.errors('price')}" th:text="${err}" style="color: red;"></div>
             </div>
             <div>
                 <label for="color">Color</label>
