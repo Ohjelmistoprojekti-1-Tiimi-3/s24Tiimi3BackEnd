@@ -75,4 +75,17 @@ public class ProductController {
         return "editProduct";
     }
 
+    @RequestMapping(value = "/saveEditedProduct", method = RequestMethod.POST)
+    public String saveEditedProduct(@Valid @ModelAttribute("editproduct") Product product, BindingResult bindingResult, Model model) {
+        
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("sizes", sizerepo.findAll());
+            model.addAttribute("types", typerepo.findAll());
+            model.addAttribute("manufacturers", manufacturerrepo.findAll());
+			return "editProduct";
+		}
+        productrepo.save(product);
+        return "redirect:productList";
+    }
+
 }
