@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import s24.backend.domain.Customer;
 import s24.backend.domain.CustomerRepository;
 import s24.backend.domain.Manufacturer;
 import s24.backend.domain.ManufacturerRepository;
@@ -72,6 +73,11 @@ public class BackendApplication {
 			prepo.save(p1);
 			prepo.save(p2);
 			prepo.save(p3);
+
+			Customer c1 = new Customer("Maija", "Mehiläinen", "maijameh@gmail.com");
+			Customer c2 = new Customer("Jorma", "Jormanen", "jormajor@gmail.com");
+			crepo.save(c1);
+			crepo.save(c2);
 
 		};
 	}
