@@ -2,6 +2,7 @@ package s24.backend.domain;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -12,6 +13,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PositiveOrZero;
 
 @Entity
 public class Product {
@@ -19,21 +22,27 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long productid;
+
+    @NotEmpty(message = "Product name has to be given")
     private String productname;
+    @PositiveOrZero(message = "Price has to be positive or zero")
     private Float price;
     private String color;
     private String info;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "manufacturerid")
     @JsonIgnoreProperties("products")
     private Manufacturer manufacturer;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "product_type", joinColumns = @JoinColumn(name = "productid"), inverseJoinColumns = @JoinColumn(name = "typeid"))
     @JsonIgnoreProperties("products")
     private Set<Type> type;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "product_size", joinColumns = @JoinColumn(name = "productid"), inverseJoinColumns = @JoinColumn(name = "sizeid"))
     @JsonIgnoreProperties("products")

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add manufacturer</title>
+</head>
+
+<body>
+    <h1>Add a new Manufacturer</h1>
+    <div>
+        <form action="#" th:object="${manufacturer}" th:action="@{saveManufacturer}" method="post">
+            <div>
+                <label for="manufacturername">Name</label>
+                <input type="text" id="manufacturername" th:field="*{manufacturername}" />
+                <div th:if="${#fields.hasErrors('manufacturername')}" th:each="err : ${#fields.errors('manufacturername')}" th:text="${err}" style="color: red;"></div>
+            </div>
+            <div>
+                <label for="manufacturerinfo">Info</label> 
+                <input type="text" id="manufacturerinfo" th:field="*{manufacturerinfo}" />
+            </div>
+
+            <input type="submit" value="Add" />
+            <a href="/manufacturerlist">Cancel</a>
+        </form>
+    </div>
+</body>
+
+</html>

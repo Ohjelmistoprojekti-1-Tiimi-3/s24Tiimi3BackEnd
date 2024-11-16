@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add product</title>
+    <title>Edit product</title>
 </head>
 
 <body>
-    <h1>Add a new Product</h1>
+    <h1>Edit product</h1>
     <div>
-        <form action="#" th:object="${product}" th:action="@{saveProduct}" method="post">
+        <form action="#" th:object="${editproduct}" th:action="@{/saveEditedProduct}" method="post">
+            <input type="hidden" th:field="*{productid}">
             <div>
                 <label for="productname">Name</label>
                 <input type="text" id="productname" th:field="*{productname}" />
@@ -47,17 +48,8 @@
                 <label for="info">Info</label>
                 <input type="text" id="info" th:field="*{info}" />
             </div>
-            <div>
-                <label for="manufacturer">Manufacturer</label>
-                <select id="manufacturer" name="manufacturerId">
-                    <option th:each="manufacturer : ${manufacturers}" 
-                            th:value="${manufacturer.manufacturerid}" 
-                            th:text="${manufacturer.manufacturername}">
-                    </option>
-                </select>
-            </div>
 
-            <input type="submit" value="Add" />
+            <input type="submit" value="Edit" />
             <a href="/productList">Cancel</a>
         </form>
     </div>

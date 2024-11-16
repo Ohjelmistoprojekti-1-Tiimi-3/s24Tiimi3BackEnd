@@ -2,6 +2,9 @@ package s24.backend.domain;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,9 +17,13 @@ public class Manufacturer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long manufacturerid;
+
+    @Column(unique=true)
     private String manufacturername;
+    
     private String manufacturerinfo;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "manufacturer")
     private Set<Product> products;
 

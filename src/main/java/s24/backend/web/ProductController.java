@@ -1,22 +1,21 @@
 package s24.backend.web;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import s24.backend.domain.Manufacturer;
+import jakarta.validation.Valid;
 import s24.backend.domain.ManufacturerRepository;
 import s24.backend.domain.Product;
 import s24.backend.domain.ProductRepository;
 import s24.backend.domain.SizeRepository;
 import s24.backend.domain.TypeRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProductController {
@@ -49,26 +48,44 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/saveProduct", method = RequestMethod.POST)
-    public String saveProduct(@ModelAttribute("product") Product product, @RequestParam("manufacturerId") Long manufacturerId) {
-        Manufacturer manufacturer = manufacturerrepo.findById(manufacturerId).orElse(null);
-        product.setManufacturer(manufacturer); //Asettaa valmistajan muokatulle tuotteelle
+    public String saveProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model model) {
+        
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("sizes", sizerepo.findAll());
+            model.addAttribute("types", typerepo.findAll());
+            model.addAttribute("manufacturers", manufacturerrepo.findAll());
+			return "addProduct";
+		}
         productrepo.save(product);
         return "redirect:productList";
     }
 
-    // Poistetaan tuote
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable("id") Long id, Model model) {
         productrepo.deleteById(id);
-        return "redirect:productlist";
+        return "redirect:/productList";
     }
 
-    // Muokataan tuotetta
     @GetMapping("/edit/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editproduct", productrepo.findById(id));
-        model.addAttribute("manufacturers", manufacturerrepo.findAll()); //Lisää valmistajien listan 
-        return "edit";
+        model.addAttribute("sizes", sizerepo.findAll());
+        model.addAttribute("types", typerepo.findAll());
+        model.addAttribute("manufacturers", manufacturerrepo.findAll());
+        return "editProduct";
+    }
+
+    @RequestMapping(value = "/saveEditedProduct", method = RequestMethod.POST)
+    public String saveEditedProduct(@Valid @ModelAttribute("editproduct") Product product, BindingResult bindingResult, Model model) {
+        
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("sizes", sizerepo.findAll());
+            model.addAttribute("types", typerepo.findAll());
+            model.addAttribute("manufacturers", manufacturerrepo.findAll());
+			return "editProduct";
+		}
+        productrepo.save(product);
+        return "redirect:productList";
     }
 
 }

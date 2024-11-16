@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<h1>Manufacturers</h1>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Info</th>
+    </tr>
+    <tr th:each="manufacturer : ${manufacturers}">
+        <td th:text="${manufacturer.manufacturername}"></td>
+        <td th:text="${manufacturer.manufacturerinfo}"></td>
+        <td>
+            <a th:href="@{/manufacturer/delete/{id}(id=${manufacturer.manufacturerid})}">Delete</a>
+        </td>
+    </tr>
+</table>
+
+<a href="/addManufacturer">Add manufacturer</a>
+<a href="/main">Back to the main page</a>
+
+</body>
+
+</html>

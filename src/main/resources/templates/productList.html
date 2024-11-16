@@ -1,37 +1,56 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Products</title>
 </head>
-<h1>Products</h1>
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>Size</th>
-        <th>Price</th>
-        <th>Color</th>
-        <th>Manufacturer</th>
-        <th>Info</th>
-    </tr>
-    <tr th:each="product : ${products}">
-        <td th:text="${product.productname}"></td>
-        <td>
-            <span th:each="type : ${product.type}" th:text="${type.typename} + ' '"></span>
-        </td>
-        <td>
-            <span th:each="size : ${product.size}" th:text="${size.size} + ' '"></span>
-        </td>
-        <td th:text="${product.price}"></td>
-        <td th:text="${product.color}"></td>
-        <td th:text="${product.manufacturer.manufacturername}"></td>
-        <td th:text="${product.info}"></td>
-    </tr>
-</table>
+<body>
+    <h1>Products</h1>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Price</th>
+            <th>Color</th>
+            <th>Manufacturer</th>
+            <th>Info</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.productname}"></td>
+            <td>
+                <span th:each="type : ${product.type}" th:text="${type.typename} + ' '"></span>
+            </td>
+            <td>
+                <span th:each="size : ${product.size}" th:text="${size.size} + ' '"></span>
+            </td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.color}"></td>
+            <td th:text="${product.manufacturer.manufacturername}"></td>
+            <td th:text="${product.info}"></td>
+            <td>
+               
+                <form th:action="@{/delete/{id}(id=${product.productid})}" method="post" onsubmit="deleteProduct(event)">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+                
+                <a th:href="@{/edit/{id}(id=${product.productid})}" class="btn btn-primary">Edit</a>
+            </td>
+        </tr>
+    </table>
 
-<a href="/addProduct">Add product</a>
+    <a href="/addProduct">Add product</a>
+    <a href="/main">Back to the main page</a>
 
+    <script>
+        function deleteProduct(event) {
+            event.preventDefault();
+            if (confirm("Are you sure you want to delete this item?")) {
+                // Deletes item if user confirms
+                event.target.closest('form').submit();
+            }
+        }
+    </script>
 </body>
-
 </html>
