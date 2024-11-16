@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import s24.backend.domain.CustomerRepository;
 import s24.backend.domain.Manufacturer;
 import s24.backend.domain.ManufacturerRepository;
 import s24.backend.domain.Product;
@@ -26,7 +27,7 @@ public class BackendApplication {
 
 	@Bean
 	public CommandLineRunner demo(ManufacturerRepository mrepo, ProductRepository prepo, SizeRepository srepo,
-			TypeRepository trepo) {
+			TypeRepository trepo, CustomerRepository crepo) {
 		return (args) -> {
 			Manufacturer m1 = new Manufacturer("Rukka", "erittäin korkea suojaavuus");
 			Manufacturer m2 = new Manufacturer("Basic", "laadukkaat tuotteet järkevään hintaan");
@@ -58,9 +59,20 @@ public class BackendApplication {
 			p1Sizes.add(s3);
 			Set<Type> p1Types = new HashSet<>();
 			p1Types.add(t1);
-			Product p1 = new Product("Tuotteen nimi", (float) 10.0, "Punainen", "Kiva, hyvä ja halpa", m2, p1Types,
+			Set<Type> p2Types = new HashSet<>();
+			p2Types.add(t3);
+			Set<Type> p3Types = new HashSet<>();
+			p3Types.add(t2);
+			Product p1 = new Product("Sadetakki", (float) 10.0, "Punainen", "Kiva, hyvä ja halpa", m3, p1Types,
 					p1Sizes);
+			Product p2 = new Product("Kissan ruoka", (float) 29.99, null, "namnam", m4, p2Types,
+			null);
+			Product p3 = new Product("Koiran purulelu", (float) 15, "sininen", "kestävä", m2, p3Types,
+					null);
 			prepo.save(p1);
+			prepo.save(p2);
+			prepo.save(p3);
+
 		};
 	}
 
