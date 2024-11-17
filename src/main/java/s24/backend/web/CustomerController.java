@@ -45,13 +45,13 @@ public class CustomerController {
         return "redirect:customerList";
     }
 
-    @GetMapping("/deleteCustomer/{id}")
+    @GetMapping("customer/delete/{id}")
     public String deleteCustomer(@PathVariable("id") Long id, Model model) {
         customerrepo.deleteById(id);
         return "redirect:/customerList";
     }
 
-    @GetMapping("/editCustomer/{id}")
+    @GetMapping("customer/edit/{id}")
     public String editProduct(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editcustomer", customerrepo.findById(id));
         return "editCustomer";
