@@ -3,6 +3,7 @@ package s24.backend.web;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ public class RestProductController {
     private ProductRepository productrepo;
 
     //Get all products
+    @CrossOrigin
     @GetMapping("/products")
     public Iterable<Product> getProducts() {
         return productrepo.findAll();
