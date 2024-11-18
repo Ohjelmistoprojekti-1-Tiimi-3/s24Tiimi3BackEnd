@@ -4,6 +4,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Manufacturer {
     private String manufacturerinfo;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "manufacturer")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")
     private Set<Product> products;
 
     public Manufacturer(String manufacturername, String manufacturerinfo) {
