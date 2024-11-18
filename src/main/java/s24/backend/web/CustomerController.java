@@ -52,13 +52,13 @@ public class CustomerController {
     }
 
     @GetMapping("customer/edit/{id}")
-    public String editProduct(@PathVariable("id") Long id, Model model) {
+    public String editCustomer(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editcustomer", customerrepo.findById(id));
         return "editCustomer";
     }
 
     @RequestMapping(value = "/saveEditedCustomer", method = RequestMethod.POST)
-    public String saveEditedProduct(@Valid @ModelAttribute("editcustomer") Customer customer, BindingResult bindingResult, Model model) {
+    public String saveEditedCustomer(@Valid @ModelAttribute("editcustomer") Customer customer, BindingResult bindingResult, Model model) {
         
         if (bindingResult.hasErrors()) {
             model.addAttribute("customers", customerrepo.findAll());
