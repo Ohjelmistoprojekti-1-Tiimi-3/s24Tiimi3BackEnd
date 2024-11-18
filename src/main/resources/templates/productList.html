@@ -31,7 +31,7 @@
             <td th:text="${product.info}"></td>
             <td>
                
-                <form th:action="@{/delete/{id}(id=${product.productid})}" method="post" onsubmit="deleteProduct(event)">
+                <form th:action="@{/delete/{id}(id=${product.productid})}" onsubmit="deleteProduct(event)">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
                 
