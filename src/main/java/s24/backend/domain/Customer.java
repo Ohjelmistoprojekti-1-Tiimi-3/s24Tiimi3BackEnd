@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Customer {
@@ -15,6 +16,9 @@ public class Customer {
     private String customername;
     private String customerlastname;
     private String customeremail;
+
+    @ManyToOne
+    private AppUser appUser;
 
     public Customer(String customername, String customerlastname, String customeremail) {
         this.customername = customername;
