@@ -9,12 +9,15 @@
     <tr>
         <th>Name</th>
         <th>Info</th>
+        <th>Actions</th>
     </tr>
     <tr th:each="manufacturer : ${manufacturers}">
         <td th:text="${manufacturer.manufacturername}"></td>
         <td th:text="${manufacturer.manufacturerinfo}"></td>
         <td>
             <a th:href="@{/manufacturer/delete/{id}(id=${manufacturer.manufacturerid})}">Delete</a>
+            <!-- Link to view products for this manufacturer -->
+            <a th:href="@{/manufacturer/{id}/products(id=${manufacturer.manufacturerid})}">View Products</a>
         </td>
     </tr>
 </table>

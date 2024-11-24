@@ -13,12 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import s24.backend.domain.Manufacturer;
 import s24.backend.domain.ManufacturerRepository;
+import s24.backend.domain.ProductRepository;
 
 @Controller
 public class ManufacturerController {
 
     @Autowired
     private ManufacturerRepository manufacturerrepo;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     // Adding a new manufacturer
     @RequestMapping(value = "/addManufacturer", method = RequestMethod.GET)
@@ -62,4 +66,17 @@ public class ManufacturerController {
         }
         return "redirect:/manufacturerlist";
     }
+
+    @GetMapping("/manufacturer/{id}/products")
+    public String getProductsByManufacturer(@PathVariable("id") Long manufacturerId, Model model) {
+
+    Manufacturer manufacturer = manufacturerrepo.findById(manufacturerId)
+        .orElseThrow(() -> new IllegalArgumentException("Invalid manufacturer Id:" + manufacturerId));
+    
+    model.addAttribute("manufacturer", manufacturer);
+    model.addAttribute("products", productRepository.findByManufacturer(manufacturer));
+
+    return "manufacturerProducts";
+}
+
 }
