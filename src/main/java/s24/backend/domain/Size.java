@@ -8,7 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Size {
@@ -18,7 +18,7 @@ public class Size {
     private Long sizeid;
     private String size;
 
-    @ManyToMany(mappedBy = "size")
+    @OneToMany(mappedBy = "size")
     @JsonIgnoreProperties("size")
     private Set<Product> products;
 
