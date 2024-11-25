@@ -12,6 +12,9 @@
     <div>
         <form action="#" th:object="${editproduct}" th:action="@{/saveEditedProduct}" method="post">
             <input type="hidden" th:field="*{productid}">
+
+            <input type="hidden" th:field="*{quantity}" />
+            
             <div>
                 <label for="productname">Name</label>
                 <input type="text" id="productname" th:field="*{productname}" />
