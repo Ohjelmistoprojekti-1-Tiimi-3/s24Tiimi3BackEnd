@@ -17,7 +17,7 @@ public class AppUser {
     @Column(name = "passwordhash", nullable = false)
     private String passwordhash;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "user_role", nullable = false)
     private String role;
 
     @OneToMany(mappedBy = "appUser")
