@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import s24.backend.domain.AppUser;
+import s24.backend.domain.AppUserRepository;
 import s24.backend.domain.Customer;
 import s24.backend.domain.CustomerRepository;
 import s24.backend.domain.Manufacturer;
@@ -25,7 +27,7 @@ public class BackendApplication {
 
 	@Bean
 	public CommandLineRunner demo(ManufacturerRepository mrepo, ProductRepository prepo, SizeRepository srepo,
-			TypeRepository trepo, CustomerRepository crepo) {
+			TypeRepository trepo, CustomerRepository crepo, AppUserRepository arepo) {
 		return (args) -> {
 			Manufacturer m1 = new Manufacturer("Rukka", "erittäin korkea suojaavuus");
 			Manufacturer m2 = new Manufacturer("Basic", "laadukkaat tuotteet järkevään hintaan");
@@ -64,6 +66,8 @@ public class BackendApplication {
 			crepo.save(c1);
 			crepo.save(c2);
 
+			AppUser admin = new AppUser("admin", "$2a$10$z9TZiBsJv7/1tk5V7TRcVOwJlsNhzgV3DKi4ArViniEPOmaLZ2kbC", "ROLE_ADMIN");
+			arepo.save(admin);
 		};
 	}
 
