@@ -12,8 +12,8 @@ CREATE TABLE AppUser(
     user_role varchar(25) NOT NULL
 );
 
-INSERT INTO app_user (username, passwordhash, role) VALUES 
-('admin', '$2a$10$z9TZiBsJv7/1tk5V7TRcVOwJlsNhzgV3DKi4ArViniEPOmaLZ2kbC', 'ROLE_ADMIN'),
+INSERT INTO app_user (username, passwordhash, user_role) VALUES 
+('admin', '$2a$10$z9TZiBsJv7/1tk5V7TRcVOwJlsNhzgV3DKi4ArViniEPOmaLZ2kbC', 'ROLE_ADMIN');
 
 CREATE TABLE Customer(
     customerid BIGSERIAL PRIMARY KEY,
