@@ -93,6 +93,10 @@ public class ProductController {
             model.addAttribute("manufacturers", manufacturerrepo.findAll());
 			return "editProduct";
 		}
+
+        // Jotta quantity pysyy samana
+        Product existingProduct = productrepo.findById(product.getProductid()).orElseThrow(() -> new IllegalArgumentException("Invalid product Id:" + product.getProductid()));
+        product.setQuantity(existingProduct.getQuantity());
         productrepo.save(product);
         return "redirect:productList";
     }

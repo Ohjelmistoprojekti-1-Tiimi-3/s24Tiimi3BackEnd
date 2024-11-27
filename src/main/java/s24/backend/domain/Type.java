@@ -8,9 +8,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "product_type")
 public class Type {
 
     @Id
@@ -18,7 +20,7 @@ public class Type {
     private Long typeid;
     private String typename;
 
-    @ManyToMany(mappedBy = "type")
+    @OneToMany(mappedBy = "type")
     @JsonIgnoreProperties("type")
     private Set<Product> products;
 

@@ -1,7 +1,5 @@
 package s24.backend;
 
-import java.util.HashSet;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
@@ -35,13 +33,11 @@ public class ProductRepositoryTest {
     public void addNewProductShouldGrowRepoSizeByOne() {
         Manufacturer testmanufacturer = new Manufacturer("TestManufacturer", "TestInfo");
         manufacturerrepo.save(testmanufacturer);
-        Type testtype =  new Type("TestType");
+        Type testtype = new Type("TestType");
         typerepo.save(testtype);
-        Set<Type> testtypes = new HashSet<>();
         Size testsize = new Size("S");
         sizerepo.save(testsize);
-        Set<Size> testsizes = new HashSet<>();
-        Product testproduct = new Product("TestName", (float) 10.0, "Red", "TestInfo", testmanufacturer, testtypes, testsizes);
+        Product testproduct = new Product("TestName", (float) 10.0, "Red", "TestInfo", testmanufacturer, testtype, testsize, 10);
 
         long firstcount = productrepo.count();
         productrepo.save(testproduct);
@@ -54,13 +50,12 @@ public class ProductRepositoryTest {
     public void deletingProductShouldReductRepoSizeByOne() {
         Manufacturer testmanufacturer = new Manufacturer("TestManufacturer", "TestInfo");
         manufacturerrepo.save(testmanufacturer);
-        Type testtype =  new Type("TestType");
+        Type testtype = new Type("TestType");
         typerepo.save(testtype);
-        Set<Type> testtypes = new HashSet<>();
+
         Size testsize = new Size("S");
         sizerepo.save(testsize);
-        Set<Size> testsizes = new HashSet<>();
-        Product testproduct = new Product("TestName", (float) 10.0, "Red", "TestInfo", testmanufacturer, testtypes, testsizes);
+        Product testproduct = new Product("TestName", (float) 10.0, "Red", "TestInfo", testmanufacturer, testtype, testsize, 10);
         productrepo.save(testproduct);
 
         long firstcount = productrepo.count();

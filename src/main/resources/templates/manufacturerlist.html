@@ -5,6 +5,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <h1>Manufacturers</h1>
+<!-- Error if you try to delete a manufacturer that has products in the system -->
+<div th:if="${error}" th:text="${error}" style="color: red;"></div>
+
 <table>
     <tr>
         <th>Name</th>

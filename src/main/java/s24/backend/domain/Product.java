@@ -1,7 +1,5 @@
 package s24.backend.domain;
 
-import java.util.Set;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -9,8 +7,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -28,24 +24,45 @@ public class Product {
     private Float price;
     private String color;
     private String info;
+    private Integer quantity;
 
     @ManyToOne
     @JoinColumn(name = "manufacturerid")
     @JsonIgnoreProperties({"manufacturerid", "products", "manufacturerinfo"})
     private Manufacturer manufacturer;
 
-    @ManyToMany
-    @JoinTable(name = "product_type", joinColumns = @JoinColumn(name = "productid"), inverseJoinColumns = @JoinColumn(name = "typeid"))
-    @JsonIgnoreProperties({"typeid", "products"})
-    private Set<Type> type;
 
-    @ManyToMany
-    @JoinTable(name = "product_size", joinColumns = @JoinColumn(name = "productid"), inverseJoinColumns = @JoinColumn(name = "sizeid"))
-    @JsonIgnoreProperties({"sizeid", "products"})
-    private Set<Size> size;
+    @ManyToOne
+    @JoinColumn(name = "typeid")
+    @JsonIgnoreProperties({"typeid", "products"})
+    private Type type;
+
+    @ManyToOne
+    @JoinColumn(name = "sizeid")
+    @JsonIgnoreProperties({ "sizeid", "products" })
+    private Size size;
+
+
+/*
+ * @ManyToMany
+ * 
+ * @JoinTable(name = "product_type", joinColumns = @JoinColumn(name =
+ * "productid"), inverseJoinColumns = @JoinColumn(name = "typeid"))
+ * 
+ * @JsonIgnoreProperties({"typeid", "products"})
+ * private Set<Type> type;
+ * 
+ * @ManyToMany
+ * 
+ * @JoinTable(name = "product_size", joinColumns = @JoinColumn(name =
+ * "productid"), inverseJoinColumns = @JoinColumn(name = "sizeid"))
+ * 
+ * @JsonIgnoreProperties({"sizeid", "products"})
+ * private Set<Size> size;
+ */
 
     public Product(String productname, Float price, String color, String info,
-            Manufacturer manufacturer, Set<Type> type, Set<Size> size) {
+            Manufacturer manufacturer, Type type, Size size, Integer quantity) {
         this.productname = productname;
         this.price = price;
         this.color = color;
@@ -53,6 +70,7 @@ public class Product {
         this.manufacturer = manufacturer;
         this.type = type;
         this.size = size;
+        this.quantity = quantity;
     }
 
     public Product() {
@@ -106,20 +124,28 @@ public class Product {
         this.manufacturer = manufacturer;
     }
 
-    public Set<Type> getType() {
+    public Type getType() {
         return type;
     }
 
-    public void setType(Set<Type> type) {
+    public void setType(Type type) {
         this.type = type;
     }
 
-    public Set<Size> getSize() {
+    public Size getSize() {
         return size;
     }
 
-    public void setSize(Set<Size> size) {
+    public void setSize(Size size) {
         this.size = size;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 
     @Override

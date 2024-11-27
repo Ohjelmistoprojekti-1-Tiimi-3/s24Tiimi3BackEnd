@@ -47,6 +47,15 @@ public class ManufacturerController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/manufacturer/delete/{id}")
     public String deleteManufacturer(@PathVariable("id") Long id, Model model) {
+        Manufacturer manufacturer = manufacturerrepo.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid manufacturer Id:" + id));
+
+        if (manufacturer.getProducts() != null && !manufacturer.getProducts().isEmpty()) {
+            model.addAttribute("error", "Cannot delete manufacturer since there are products in the system");
+            model.addAttribute("manufacturers", manufacturerrepo.findAll());
+            return "manufacturerlist";
+        }
+
         manufacturerrepo.deleteById(id);
         return "redirect:/manufacturerlist";
     }

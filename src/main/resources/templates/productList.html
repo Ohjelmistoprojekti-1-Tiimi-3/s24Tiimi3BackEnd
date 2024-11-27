@@ -15,6 +15,7 @@
             <th>Color</th>
             <th>Manufacturer</th>
             <th>Info</th>
+            <th>Quantity</th>
             <th>Actions</th>
         </tr>
         <tr th:each="product : ${products}">
@@ -29,6 +30,7 @@
             <td th:text="${product.color}"></td>
             <td th:text="${product.manufacturer.manufacturername}"></td>
             <td th:text="${product.info}"></td>
+            <td th:text="${product.quantity}"></td>
             <td>
                
                 <form th:action="@{/delete/{id}(id=${product.productid})}" onsubmit="deleteProduct(event)">
