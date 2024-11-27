@@ -25,7 +25,7 @@ public class BackendApplication {
 		SpringApplication.run(BackendApplication.class, args);
 	}
 
-	/* @Bean
+	@Bean
 	public CommandLineRunner demo(ManufacturerRepository mrepo, ProductRepository prepo, SizeRepository srepo,
 			TypeRepository trepo, CustomerRepository crepo, AppUserRepository arepo) {
 		return (args) -> {
@@ -69,6 +69,6 @@ public class BackendApplication {
 			AppUser admin = new AppUser("admin", "$2a$10$z9TZiBsJv7/1tk5V7TRcVOwJlsNhzgV3DKi4ArViniEPOmaLZ2kbC", "ROLE_ADMIN");
 			arepo.save(admin);
 		};
-	} */
+	}
 
 }
