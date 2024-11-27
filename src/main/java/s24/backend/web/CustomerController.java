@@ -1,6 +1,7 @@
 package s24.backend.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,12 +22,14 @@ public class CustomerController {
     private CustomerRepository customerrepo;
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/customerList", method = RequestMethod.GET)
     public String showCustomers(Model model) {
         model.addAttribute("customers", customerrepo.findAll());
         return "customerList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/addCustomer", method = RequestMethod.GET)
     public String addCustomer(Model model) {
         model.addAttribute("customer", new Customer());
@@ -34,6 +37,7 @@ public class CustomerController {
         return "addCustomer";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/saveCustomer", method = RequestMethod.POST)
     public String saveCustomer(@Valid @ModelAttribute("customer") Customer customer, BindingResult bindingResult, Model model) {
         
@@ -45,18 +49,21 @@ public class CustomerController {
         return "redirect:customerList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("customer/delete/{id}")
     public String deleteCustomer(@PathVariable("id") Long id, Model model) {
         customerrepo.deleteById(id);
         return "redirect:/customerList";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("customer/edit/{id}")
     public String editCustomer(@PathVariable("id") Long id, Model model) {
         model.addAttribute("editcustomer", customerrepo.findById(id));
         return "editCustomer";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/saveEditedCustomer", method = RequestMethod.POST)
     public String saveEditedCustomer(@Valid @ModelAttribute("editcustomer") Customer customer, BindingResult bindingResult, Model model) {
         

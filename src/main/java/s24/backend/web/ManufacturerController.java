@@ -2,6 +2,7 @@ package s24.backend.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +25,9 @@ public class ManufacturerController {
     @Autowired
     private ProductRepository productRepository;
 
+
     // Adding a new manufacturer
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/addManufacturer", method = RequestMethod.GET)
     public String addManufacturer(Model model) {
         model.addAttribute("manufacturer", new Manufacturer());
@@ -33,6 +36,7 @@ public class ManufacturerController {
     }
 
     //showing the manufacturers
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/manufacturerlist")
     public String showManufacturers(Model model) {
         model.addAttribute("manufacturers", manufacturerrepo.findAll());
@@ -40,6 +44,7 @@ public class ManufacturerController {
     }
 
     //delete manufacturer
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/manufacturer/delete/{id}")
     public String deleteManufacturer(@PathVariable("id") Long id, Model model) {
         manufacturerrepo.deleteById(id);
@@ -52,6 +57,7 @@ public class ManufacturerController {
      * because Thymeleaf does not handle validation from unique constraints without a separate method
     */
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(value = "/saveManufacturer", method = RequestMethod.POST)
     public String saveManufacturer(@ModelAttribute("manufacturer") Manufacturer manufacturer, BindingResult bindingResult) {
 
@@ -67,6 +73,7 @@ public class ManufacturerController {
         return "redirect:/manufacturerlist";
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/manufacturer/{id}/products")
     public String getProductsByManufacturer(@PathVariable("id") Long manufacturerId, Model model) {
 

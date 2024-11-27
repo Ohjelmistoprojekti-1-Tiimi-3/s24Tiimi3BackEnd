@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <title>Kirjaudu sisään</title>
+</head>
+
+<body>
+    <form method="post" action="/login">
+        <div>
+            <label for="username">Käyttäjätunnus</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <label for="password">Salasana</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit">Kirjaudu</button>
+    </form>
+    
+</body>
+</html>

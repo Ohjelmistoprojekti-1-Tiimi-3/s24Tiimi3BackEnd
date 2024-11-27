@@ -1,6 +1,7 @@
 package s24.backend.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,9 @@ public class RestCustomerController {
     @Autowired
     private CustomerRepository customerrepo;
 
+
     // Get all customers
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/customers")
     public Iterable<Customer> getCustomers() {
         return customerrepo.findAll();
@@ -29,6 +32,7 @@ public class RestCustomerController {
     
 
     // Adding a new customer
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/addcustomer")
     public Customer newCustomer(@RequestBody Customer newCustomer) {
         
@@ -36,6 +40,7 @@ public class RestCustomerController {
     }
 
     // Deleting a customer
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/deletecustomer/{id}")
     public Iterable<Customer> deleteCustomer(@PathVariable("id") Long customerid) {
 
