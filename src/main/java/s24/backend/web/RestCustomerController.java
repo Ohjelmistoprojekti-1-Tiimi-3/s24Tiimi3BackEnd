@@ -24,7 +24,6 @@ public class RestCustomerController {
 
 
     // Get all customers
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/customers")
     public Iterable<Customer> getCustomers() {
         return customerrepo.findAll();

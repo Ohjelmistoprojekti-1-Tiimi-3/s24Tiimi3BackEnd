@@ -1,4 +1,5 @@
 package s24.backend;
+import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,7 +24,8 @@ public class WebSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             .authorizeHttpRequests(authorize -> authorize
-                .requestMatchers("/login").permitAll() 
+                .requestMatchers("/login", "/main").permitAll()
+                .requestMatchers(antMatcher("/api/**")).permitAll() 
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
             )

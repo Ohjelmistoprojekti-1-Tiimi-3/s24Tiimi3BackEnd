@@ -2,6 +2,7 @@ package s24.backend.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -44,6 +45,7 @@ public class Product {
     @JsonIgnoreProperties({ "sizeid", "products" })
     private Size size;
 
+    @JsonIgnore
     @OneToMany( mappedBy = "product")
     private List<Order> orders;
 

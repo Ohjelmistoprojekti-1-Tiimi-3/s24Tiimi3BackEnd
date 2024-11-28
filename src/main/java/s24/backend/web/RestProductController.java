@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.access.prepost.PreAuthorize;
 
 
 import s24.backend.domain.Manufacturer;
@@ -28,7 +27,6 @@ public class RestProductController {
     private ManufacturerRepository manufacturerrepo;
 
     //Get all products
-    @PreAuthorize("hasRole('ADMIN')")    
     @CrossOrigin
     @GetMapping("/products")
     public Iterable<Product> getProducts() {
