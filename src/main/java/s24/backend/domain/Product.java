@@ -1,5 +1,7 @@
 package s24.backend.domain;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -8,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.PositiveOrZero;
 
@@ -28,13 +31,12 @@ public class Product {
 
     @ManyToOne
     @JoinColumn(name = "manufacturerid")
-    @JsonIgnoreProperties({"manufacturerid", "products", "manufacturerinfo"})
+    @JsonIgnoreProperties({ "manufacturerid", "products", "manufacturerinfo" })
     private Manufacturer manufacturer;
-
 
     @ManyToOne
     @JoinColumn(name = "typeid")
-    @JsonIgnoreProperties({"typeid", "products"})
+    @JsonIgnoreProperties({ "typeid", "products" })
     private Type type;
 
     @ManyToOne
@@ -42,24 +44,26 @@ public class Product {
     @JsonIgnoreProperties({ "sizeid", "products" })
     private Size size;
 
+    @OneToMany( mappedBy = "product")
+    private List<Order> orders;
 
-/*
- * @ManyToMany
- * 
- * @JoinTable(name = "product_type", joinColumns = @JoinColumn(name =
- * "productid"), inverseJoinColumns = @JoinColumn(name = "typeid"))
- * 
- * @JsonIgnoreProperties({"typeid", "products"})
- * private Set<Type> type;
- * 
- * @ManyToMany
- * 
- * @JoinTable(name = "product_size", joinColumns = @JoinColumn(name =
- * "productid"), inverseJoinColumns = @JoinColumn(name = "sizeid"))
- * 
- * @JsonIgnoreProperties({"sizeid", "products"})
- * private Set<Size> size;
- */
+    /*
+     * @ManyToMany
+     * 
+     * @JoinTable(name = "product_type", joinColumns = @JoinColumn(name =
+     * "productid"), inverseJoinColumns = @JoinColumn(name = "typeid"))
+     * 
+     * @JsonIgnoreProperties({"typeid", "products"})
+     * private Set<Type> type;
+     * 
+     * @ManyToMany
+     * 
+     * @JoinTable(name = "product_size", joinColumns = @JoinColumn(name =
+     * "productid"), inverseJoinColumns = @JoinColumn(name = "sizeid"))
+     * 
+     * @JsonIgnoreProperties({"sizeid", "products"})
+     * private Set<Size> size;
+     */
 
     public Product(String productname, Float price, String color, String info,
             Manufacturer manufacturer, Type type, Size size, Integer quantity) {
@@ -147,12 +151,21 @@ public class Product {
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
+    
 
+    
+    public List<Order> getOrders() {
+        return orders;
+    }
+    
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+    
     @Override
     public String toString() {
         return "product id = " + productid + ", product name = " + productname + ", price = " + price + ", color = "
                 + color + ", info = " + info + ", manufacturer = " + manufacturer + ", type = " + type + ", size = "
                 + size;
     }
-
 }

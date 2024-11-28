@@ -1,10 +1,14 @@
 package s24.backend.domain;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Customer {
@@ -20,13 +24,16 @@ public class Customer {
     @ManyToOne
     private AppUser appUser;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<Order> orders;
+
     public Customer(String customername, String customerlastname, String customeremail) {
         this.customername = customername;
         this.customerlastname = customerlastname;
         this.customeremail = customeremail;
     }
 
-    public Customer(){
+    public Customer() {
     }
 
     public Long getCustomerid() {
@@ -61,13 +68,26 @@ public class Customer {
         this.customeremail = customeremail;
     }
 
+    public AppUser getAppUser() {
+        return appUser;
+    }
+
+    public void setAppUser(AppUser appUser) {
+        this.appUser = appUser;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
+    }
+
     @Override
     public String toString() {
         return "customerid = " + customerid + ", customername = " + customername + ", customerlastname = "
                 + customerlastname + ", customeremail = " + customeremail;
     }
 
-    
-
-    
 }

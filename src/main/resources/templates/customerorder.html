@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<h1>Asiakkaat, joilla on tilaus</h1>
+<table>
+    <tr>
+        <th>Product</th>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Color</th>
+        <th>manufacturer</th>
+        <th>info</th>
+        <th>status</th>
+        <th>amount</th>
+    </tr>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.product.productname}"></td>
+        <td th:text="${order.product.type.typename}"></td>       
+        <td th:text="${order.product.price}"></td>
+        <td th:text="${order.product.color}"></td>
+        <td th:text="${order.product.manufacturer.manufacturername}"></td>
+        <td th:text="${order.product.info}"></td>
+        <td th:text="${order.status}"></td>
+        <td th:text="${order.amount}"></td>
+        <td>
+        </td>
+    </tr>
+</table>
+
+<a href="/addorder">Add order</a>
+<a href="/main">Back to the main page</a>
+
+</body>
+
+</html>

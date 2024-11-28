@@ -11,6 +11,8 @@ import s24.backend.domain.Customer;
 import s24.backend.domain.CustomerRepository;
 import s24.backend.domain.Manufacturer;
 import s24.backend.domain.ManufacturerRepository;
+import s24.backend.domain.Order;
+import s24.backend.domain.OrderRepository;
 import s24.backend.domain.Product;
 import s24.backend.domain.ProductRepository;
 import s24.backend.domain.Size;
@@ -27,7 +29,7 @@ public class BackendApplication {
 
 	@Bean
 	public CommandLineRunner demo(ManufacturerRepository mrepo, ProductRepository prepo, SizeRepository srepo,
-			TypeRepository trepo, CustomerRepository crepo, AppUserRepository arepo) {
+			TypeRepository trepo, CustomerRepository crepo, AppUserRepository arepo, OrderRepository orepo) {
 		return (args) -> {
 			Manufacturer m1 = new Manufacturer("Rukka", "erittäin korkea suojaavuus");
 			Manufacturer m2 = new Manufacturer("Basic", "laadukkaat tuotteet järkevään hintaan");
@@ -68,6 +70,9 @@ public class BackendApplication {
 
 			AppUser admin = new AppUser("admin", "$2a$10$z9TZiBsJv7/1tk5V7TRcVOwJlsNhzgV3DKi4ArViniEPOmaLZ2kbC", "ROLE_ADMIN");
 			arepo.save(admin);
+
+			Order o1 = new Order("Tilaus käsittelyssä", 1, c2, p3);
+			orepo.save(o1);
 		};
 	}
 
