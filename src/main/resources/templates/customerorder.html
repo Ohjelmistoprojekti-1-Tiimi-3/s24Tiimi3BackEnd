@@ -26,6 +26,8 @@
         <td th:text="${order.status}"></td>
         <td th:text="${order.amount}"></td>
         <td>
+            <a th:href="@{/deliverorder(id=${order.orderid})}">Toimitettu</a>
+            <a th:href="@{/cancelorder(id=${order.orderid})}">Peruttu</a>
         </td>
     </tr>
 </table>

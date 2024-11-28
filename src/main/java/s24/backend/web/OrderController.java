@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import s24.backend.domain.Customer;
 import s24.backend.domain.CustomerRepository;
@@ -33,7 +34,7 @@ public class OrderController {
     }
 
     @GetMapping("/orders/{id}")
-    public String showCustomerOrders(@PathVariable("id") Long id,Model model) {
+    public String showCustomerOrders(@PathVariable("id") Long id, Model model) {
         Customer c = customerrepo.findById(id).get();
         model.addAttribute("orders", orderrepo.findByCustomer(c));
         return "customerorder";
@@ -52,5 +53,23 @@ public class OrderController {
         order.setStatus("Tilaus käsittelyssä");
         orderrepo.save(order);
         return "redirect:orders";
+    }
+
+    @GetMapping("/deliverorder")
+    public String deliverOrder(@RequestParam(name = "id") Long id) {
+        Long returnid = orderrepo.findById(id).get().getCustomer().getCustomerid();
+        Order order = orderrepo.findById(id).get();
+        order.setStatus("Tilaus toimitettu");
+        orderrepo.save(order);
+        return "redirect:orders/" + returnid;
+    }
+
+    @GetMapping("/cancelorder")
+    public String cancelOrder(@RequestParam(name = "id") Long id) {
+        Long returnid = orderrepo.findById(id).get().getCustomer().getCustomerid();
+        Order order = orderrepo.findById(id).get();
+        order.setStatus("Tilaus peruttu");
+        orderrepo.save(order);
+        return "redirect:orders/" + returnid;
     }
 }
