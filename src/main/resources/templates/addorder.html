@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add product</title>
+</head>
+
+<body>
+    <h1>Add a new Product</h1>
+    <div>
+        <form action="#" th:object="${order}" th:action="@{saveorder}" method="post">
+            <div>
+                <label for="customer">Customer</label>
+                <select id="customer" th:field="*{customer}">
+                    <option th:each="customer : ${customers}" th:value="${customer.customerid}" th:text="${customer.customername}"></option>
+                </select>
+            </div>
+            <div>
+                <label for="product">Product</label>
+                <select id="product" th:field="*{product}">
+                    <option th:each="product: ${products}" th:value="${product.productid}" th:text="${product.productname}"></option>
+                </select>
+            </div>
+            <div>
+                <label for="amount">Amount</label>
+                <input type="number" id="amount" th:field="*{amount}" />
+            </div>
+
+            <input type="submit" value="Add" />
+            <a href="/orders">Cancel</a>
+        </form>
+    </div>
+</body>
+
+</html>
