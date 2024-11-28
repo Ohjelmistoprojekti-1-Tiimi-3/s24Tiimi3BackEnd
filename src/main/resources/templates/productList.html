@@ -32,12 +32,12 @@
             <td th:text="${product.info}"></td>
             <td th:text="${product.quantity}"></td>
             <td>
-               
                 <form th:action="@{/delete/{id}(id=${product.productid})}" onsubmit="deleteProduct(event)">
                     <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
-                
+
                 <a th:href="@{/edit/{id}(id=${product.productid})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/admin/updateQuantity/{id}(id=${product.productid})}" class="btn btn-secondary">Update Quantity</a>
             </td>
         </tr>
     </table>

@@ -101,4 +101,28 @@ public class ProductController {
         return "redirect:productList";
     }
 
+    // Tuotemäärän päivitykseen, oikeudet vain adminilla
+    @PreAuthorize("hasRole('ADMIN')")
+@GetMapping("/admin/updateQuantity/{id}")
+public String showUpdateQuantityPage(@PathVariable("id") long id, Model model) {
+    Product product = productrepo.findById(id)
+        .orElseThrow(() -> new IllegalArgumentException("Invalid product Id: " + id));
+    model.addAttribute("product", product);
+    return "updateQuantity"; // Tässä viitataan updateQuantityyn
+}
+
+@PreAuthorize("hasRole('ADMIN')")
+@RequestMapping(value = "/admin/saveQuantity", method = RequestMethod.POST)
+public String saveUpdatedQuantity(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model model) {
+    if (bindingResult.hasErrors()) {
+        return "updateQuantity";
+    }
+    Product existingProduct = productrepo.findById(product.getProductid())
+        .orElseThrow(() -> new IllegalArgumentException("Invalid product Id: " + product.getProductid()));
+    existingProduct.setQuantity(product.getQuantity());
+    productrepo.save(existingProduct);
+    return "redirect:/productList";
+}
+
+
 }
