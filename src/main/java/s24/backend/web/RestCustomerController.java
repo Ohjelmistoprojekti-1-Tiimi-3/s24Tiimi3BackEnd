@@ -1,5 +1,7 @@
 package s24.backend.web;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +31,11 @@ public class RestCustomerController {
         return customerrepo.findAll();
     }
     
+    // Get specific customer
+    @GetMapping("/customer/{id}")
+	public Optional<Customer> getMovieById(@PathVariable("id") Long customerid) {
+		return customerrepo.findById(customerid);
+	}
 
     // Adding a new customer
     @PreAuthorize("hasRole('ADMIN')")
