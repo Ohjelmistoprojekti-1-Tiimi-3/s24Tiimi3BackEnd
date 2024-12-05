@@ -33,7 +33,7 @@ public class RestCustomerController {
     
     // Get specific customer
     @GetMapping("/customer/{id}")
-	public Optional<Customer> getMovieById(@PathVariable("id") Long customerid) {
+	public Optional<Customer> getCustomerById(@PathVariable("id") Long customerid) {
 		return customerrepo.findById(customerid);
 	}
 
