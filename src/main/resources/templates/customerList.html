@@ -3,6 +3,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+
 </head>
 <h1>Customers</h1>
 <table>
@@ -10,6 +12,7 @@
         <th>First name</th>
         <th>Last name</th>
         <th>Email</th>
+        <th>Actions</th>
     </tr>
     <tr th:each="customer : ${customers}">
         <td th:text="${customer.customername}"></td>
