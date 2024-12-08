@@ -1,7 +1,6 @@
 package s24.backend.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +23,6 @@ public class RestOrderController {
     private OrderRepository orderrepo;
 
     // Get all orders
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/orders")
     public Iterable<Order> getOrders() {
 
@@ -32,7 +30,6 @@ public class RestOrderController {
     }
 
     // Adding a new order
-    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/addorder")
     public Order newOrder(@RequestBody Order newOrder) {
 
@@ -40,7 +37,6 @@ public class RestOrderController {
     }
 
     // Deleting an order
-    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/deleteorder/{id}")
     public Iterable<Order> deleteOrder(@PathVariable("id") Long orderid) {
 
@@ -49,7 +45,6 @@ public class RestOrderController {
     }
 
     // Editing an order
-    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/order/{id}")
     Order editOrder(@RequestBody Order editOrder, @PathVariable("id") Long orderid) {
 
