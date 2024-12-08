@@ -40,6 +40,8 @@
 
                 <a th:href="@{/edit/{id}(id=${product.productid})}" class="btn btn-primary">Edit</a>
                 <a th:href="@{/admin/updateQuantity/{id}(id=${product.productid})}" class="btn btn-secondary">Update Quantity</a>
+                
+                <a th:href="@{/reservation/{id}(id=${product.productid})}" class="btn btn-success">Reserve</a>
             </td>
         </tr>
     </table>

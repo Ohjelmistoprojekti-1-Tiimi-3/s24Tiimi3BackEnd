@@ -7,25 +7,23 @@
     <h1>Varaa tuote: <span th:text="${product.productname}"></span></h1>
 
     <form th:action="@{/saveReservation}" th:object="${reservation}" method="post">
-        <!-- Hidden input for product ID -->
+       
         <input type="hidden" th:field="*{product.productid}" th:value="${product.productid}" />
 
-        <!-- Quantity input -->
+        
         <label for="quantity">Quantity</label>
         <input type="number" th:field="*{quantity}" min="1" max="100" required/>
 
-        <!-- Customer Name input -->
+       
         <label for="customerName">Name</label>
         <input type="text" th:field="*{customerName}" required/>
 
-        <!-- Customer Email input -->
         <label for="customerEmail">E-mail</label>
         <input type="email" th:field="*{customerEmail}" required/>
 
         <button type="submit">Reserve</button>
     </form>
 
-    <!-- Error message display -->
     <div th:if="${error}">
         <p style="color: red;" th:text="${error}"></p>
     </div>
