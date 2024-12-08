@@ -2,6 +2,7 @@ package s24.backend.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import s24.backend.domain.Order;
 import s24.backend.domain.OrderRepository;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class RestOrderController {
@@ -21,11 +23,11 @@ public class RestOrderController {
     @Autowired
     private OrderRepository orderrepo;
 
-    //Get all orders
+    // Get all orders
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/orders")
     public Iterable<Order> getOrders() {
-        
+
         return orderrepo.findAll();
     }
 
@@ -33,7 +35,7 @@ public class RestOrderController {
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/addorder")
     public Order newOrder(@RequestBody Order newOrder) {
-        
+
         return orderrepo.save(newOrder);
     }
 
@@ -48,11 +50,11 @@ public class RestOrderController {
 
     // Editing an order
     @PreAuthorize("hasRole('ADMIN')")
-	@PutMapping("/order/{id}")
-	Order editOrder(@RequestBody Order editOrder, @PathVariable("id") Long orderid) {
-		
+    @PutMapping("/order/{id}")
+    Order editOrder(@RequestBody Order editOrder, @PathVariable("id") Long orderid) {
+
         editOrder.setOrderid(orderid);
-		return orderrepo.save(editOrder);
-	}
+        return orderrepo.save(editOrder);
+    }
 
 }

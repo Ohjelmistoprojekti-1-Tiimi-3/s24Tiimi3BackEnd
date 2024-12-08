@@ -9,14 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import s24.backend.domain.Manufacturer;
 import s24.backend.domain.ManufacturerRepository;
 import s24.backend.domain.Product;
 import s24.backend.domain.ProductRepository;
 
-
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api")
 public class RestProductController {
@@ -26,8 +24,7 @@ public class RestProductController {
     @Autowired
     private ManufacturerRepository manufacturerrepo;
 
-    //Get all products
-    @CrossOrigin
+    // Get all products
     @GetMapping("/products")
     public Iterable<Product> getProducts() {
         return productrepo.findAll();
