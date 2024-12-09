@@ -30,6 +30,12 @@ public class RestAppUserController {
         return Optional.of((appuserrepo.findByUsername(username)));
     }
 
+      // Get specific customer by id
+    @GetMapping("/appuser/{id}")
+    public Optional<AppUser> getAppUserById(@PathVariable("id") Long userid) {
+        return appuserrepo.findById(userid);
+    }
+
     // Adding a new AppUser
     @PostMapping("/addappuser")
     public AppUser newAppUser(@RequestBody AppUser newAppUser) {
