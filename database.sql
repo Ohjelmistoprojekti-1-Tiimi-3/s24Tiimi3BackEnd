@@ -1,11 +1,13 @@
+DROP TABLE IF EXISTS customer_order;
 DROP TABLE IF EXISTS Customer;
-DROP TABLE IF EXISTS AppUser;
+DROP TABLE IF EXISTS app_user;
+DROP TABLE IF EXISTS reservation;
 DROP TABLE IF EXISTS Product;
 DROP TABLE IF EXISTS Manufacturer;
 DROP TABLE IF EXISTS product_size;
 DROP TABLE IF EXISTS product_type;
 
-CREATE TABLE AppUser(
+CREATE TABLE app_user(
     userid BIGSERIAL PRIMARY KEY,
     username varchar(100) NOT NULL UNIQUE,
     passwordhash varchar(250) NOT NULL,
