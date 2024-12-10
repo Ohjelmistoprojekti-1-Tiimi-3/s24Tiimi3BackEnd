@@ -15,15 +15,23 @@ import java.util.Collections;
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
+    // Automatically inject the repository for database access
     @Autowired
     private AppUserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+         // Fetch the user from the database using the username
         AppUser curruser = repository.findByUsername(username);
+         // If no user is found, throw an exception
         if (curruser == null) {
             throw new UsernameNotFoundException("Käyttäjää ei löytynyt käyttäjänimellä: " + username);
         }
+
+        // Return a UserDetails implementation with the user's details:
+        // - Username
+        // - Password hash (used for authentication)
+        // - Roles/authorities (used for authorization)
 
         return new org.springframework.security.core.userdetails.User(
             curruser.getUsername(),
