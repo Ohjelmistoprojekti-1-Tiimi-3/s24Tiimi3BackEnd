@@ -16,6 +16,7 @@
         <th>Actions</th>
     </tr>
     <tr th:each="customer : ${customers}">
+        <!-- Show only customers who have orders -->
         <div th:if="${customer.orders.size() > 0}">
             <td th:text="${customer.customername}"></td>
             <td th:text="${customer.customerlastname}"></td>

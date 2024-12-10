@@ -27,12 +27,14 @@ public class OrderController {
     @Autowired
     private ProductRepository productrepo;
 
+    //Get all customers (template shows only those who have orders)
     @GetMapping("/orders")
     public String showOrders(Model model) {
         model.addAttribute("customers", customerrepo.findAll());
         return "orders";
     }
 
+    //Get all orders of a customer 
     @GetMapping("/orders/{id}")
     public String showCustomerOrders(@PathVariable("id") Long id, Model model) {
         Customer c = customerrepo.findById(id).get();
@@ -40,6 +42,7 @@ public class OrderController {
         return "customerorder";
     }
 
+    //Add new order
     @GetMapping("/addorder")
     public String addOrder(Model model) {
         model.addAttribute("order", new Order());
@@ -48,6 +51,7 @@ public class OrderController {
         return "addorder";
     }
 
+    //Save order
     @PostMapping("/saveorder")
     public String saveOrder(@ModelAttribute("order") Order order) {
         order.setStatus("Tilaus käsittelyssä");
@@ -55,6 +59,8 @@ public class OrderController {
         return "redirect:orders";
     }
 
+    //Change order status to "delivered"
+    //TODO: Completed order subtracts order amount from product quantity
     @GetMapping("/deliverorder")
     public String deliverOrder(@RequestParam(name = "id") Long id) {
         Long returnid = orderrepo.findById(id).get().getCustomer().getCustomerid();
@@ -64,6 +70,7 @@ public class OrderController {
         return "redirect:orders/" + returnid;
     }
 
+    //Cancel order
     @GetMapping("/cancelorder")
     public String cancelOrder(@RequestParam(name = "id") Long id) {
         Long returnid = orderrepo.findById(id).get().getCustomer().getCustomerid();
