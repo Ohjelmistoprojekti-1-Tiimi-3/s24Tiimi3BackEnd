@@ -1,3 +1,6 @@
+// Reservation not completed because of lack of time, 
+// it's function was to provide a way for customer to reserve an item when authenticated
+
 package s24.backend.domain;
 
 import java.time.LocalDateTime;
